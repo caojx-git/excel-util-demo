@@ -1,13 +1,26 @@
 # Excel导出与上传解析Demo
 
-### 1.入口
-入口见ExcelTestController
+### 1.主要依赖
+```xml
+     <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+```
+### 2.入口
+入口见ExcelTestController，SpringBoot项目可以直接运行
  
-### 2.导出Excel 
+### 3.导出Excel 
 支持导出Excel导出，支持使用注解注解对应的实体  
     @ExcelSheet注解实体类，value值作为sheet名   
     @ExcelCell注解实体属性，value值可作为表头  
-### 3.上传解析Excel      
+### 4.上传解析Excel      
 支持解析Excel，返回一个map  
     key作为sheet顺序编号  
     value为list，list内部数据也为list      

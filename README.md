@@ -26,11 +26,11 @@ http://localhost:8081/excel/upload
     @ExcelCell注解实体属性，value值可作为表头  
     
 #### 3.1 StudentExcelVo.java  
-![](../excel-util-demo/src/main/resources/images/excel-1.png)  
+![](src/main/resources/images/excel-1.png)  
 
 #### 3.2 导出
 http://localhost:8082/excel/export    
-![](../excel-util-demo/src/main/resources/images/excel-2.png)  
+![](src/main/resources/images/excel-2.png)  
 
     
 ### 4.上传解析（导入）Excel      
@@ -41,10 +41,10 @@ http://localhost:8082/excel/export
 
 导入第3步导出的文件演示   
 http://localhost:8082/excel/upload    
-![](../excel-util-demo/src/main/resources/images/excel-3.png)  
+![](src/main/resources/images/excel-3.png)  
 
 导入结果  
-![](../excel-util-demo/src/main/resources/images/excel-4.png)  
+![](src/main/resources/images/excel-4.png)  
 
 
  

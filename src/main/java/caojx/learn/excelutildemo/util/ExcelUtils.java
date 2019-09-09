@@ -369,8 +369,8 @@ public class ExcelUtils {
     /**
      * 上传Excel
      * 解析后的到一个map
-     *  key作为sheet行编号
-     *  value为list，list按顺序存储第0行的0list到第n行的list
+     * key为sheet行编号（0开始）
+     * value存储第1~n行的数据（去表头），行数据保存到list中
      *
      * @param file 上传的文件
      * @param path 文件保存路径
@@ -391,7 +391,7 @@ public class ExcelUtils {
             if (totalRows > 1 && sheet.getRow(0) != null) {
                 totalCells = sheet.getRow(0).getPhysicalNumberOfCells();
             }
-            // 循环Excel行数
+            // 循环Excel行数（去掉表头）
             List<List<? super Object>> list = new ArrayList<>();
             for (int r = 1; r < totalRows; r++) {
                 Row row = sheet.getRow(r);
@@ -422,7 +422,6 @@ public class ExcelUtils {
                                 } else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
                                     valueList.add(cell.getCellFormula());
                                 }
-                                ;
                             }
                         } catch (Exception e) {
                             log.error("\n==========解析Excel单元格异常==========", e);

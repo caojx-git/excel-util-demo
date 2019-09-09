@@ -149,7 +149,7 @@ public class ExcelUtils {
 
         for (int var10 = 0; var10 < var9; ++var10) {
             Field field = var8[var10];
-            ExcelCell excelCell = (ExcelCell) field.getAnnotation(ExcelCell.class);
+            ExcelCell excelCell = field.getAnnotation(ExcelCell.class);
             if (excelCell != null) {
                 Cell cell = headRow.createCell(cHeadIndex);
                 cell.setCellType(1);
@@ -190,7 +190,7 @@ public class ExcelUtils {
 
             for (int var12 = 0; var12 < var11; ++var12) {
                 Field field = var10[var12];
-                ExcelCell excelCell = (ExcelCell) field.getAnnotation(ExcelCell.class);
+                ExcelCell excelCell = field.getAnnotation(ExcelCell.class);
                 if (excelCell != null) {
                     field.setAccessible(true);
                     Object value = field.get(rowData);
@@ -224,147 +224,40 @@ public class ExcelUtils {
      */
     private static void setCellValue(Cell cell, Object value, Class<?> fieldType, ExcelCell excelCell, Map<String, CellStyle> cellStyleMap) {
         String fieldTypeName = fieldType.getSimpleName();
-        byte var7 = -1;
-        switch (fieldTypeName.hashCode()) {
-            case -1808118735:
-                if (fieldTypeName.equals("String")) {
-                    var7 = 0;
-                }
-                break;
-            case -1325958191:
-                if (fieldTypeName.equals("double")) {
-                    var7 = 5;
-                }
-                break;
-            case -672261858:
-                if (fieldTypeName.equals("Integer")) {
-                    var7 = 2;
-                }
-                break;
-            case 104431:
-                if (fieldTypeName.equals("int")) {
-                    var7 = 1;
-                }
-                break;
-            case 2086184:
-                if (fieldTypeName.equals("Byte")) {
-                    var7 = 14;
-                }
-                break;
-            case 2122702:
-                if (fieldTypeName.equals("Date")) {
-                    var7 = 15;
-                }
-                break;
-            case 2374300:
-                if (fieldTypeName.equals("Long")) {
-                    var7 = 4;
-                }
-                break;
-            case 3039496:
-                if (fieldTypeName.equals("byte")) {
-                    var7 = 13;
-                }
-                break;
-            case 3327612:
-                if (fieldTypeName.equals("long")) {
-                    var7 = 3;
-                }
-                break;
-            case 64711720:
-                if (fieldTypeName.equals("boolean")) {
-                    var7 = 11;
-                }
-                break;
-            case 67973692:
-                if (fieldTypeName.equals("Float")) {
-                    var7 = 8;
-                }
-                break;
-            case 79860828:
-                if (fieldTypeName.equals("Short")) {
-                    var7 = 10;
-                }
-                break;
-            case 97526364:
-                if (fieldTypeName.equals("float")) {
-                    var7 = 7;
-                }
-                break;
-            case 109413500:
-                if (fieldTypeName.equals("short")) {
-                    var7 = 9;
-                }
-                break;
-            case 1729365000:
-                if (fieldTypeName.equals("Boolean")) {
-                    var7 = 12;
-                }
-                break;
-            case 1857393595:
-                if (fieldTypeName.equals("DateTime")) {
-                    var7 = 17;
-                }
-                break;
-            case 2052876273:
-                if (fieldTypeName.equals("Double")) {
-                    var7 = 6;
-                }
-                break;
-            case 2059094262:
-                if (fieldTypeName.equals("Timestamp")) {
-                    var7 = 16;
-                }
-                break;
-            case 1438607953:
-                if (fieldTypeName.equals("BigDecimal")) {
-                    var7 = 18;
-                }
-        }
-
-        switch (var7) {
-            case 0:
-                cell.setCellValue((String) value);
-                break;
-            case 1:
-            case 2:
-                cell.setCellValue((double) ((Integer) value).intValue());
-                break;
-            case 3:
-            case 4:
-                cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
-                cell.setCellValue((double) ((Long) value).longValue());
-                break;
-            case 5:
-            case 6:
-                cell.setCellValue(((Double) value).doubleValue());
-                break;
-            case 7:
-            case 8:
-                cell.setCellValue((double) ((Float) value).floatValue());
-                break;
-            case 9:
-            case 10:
-                cell.setCellValue((double) ((Short) value).shortValue());
-                break;
-            case 11:
-            case 12:
-                cell.setCellValue(((Boolean) value).booleanValue());
-                break;
-            case 13:
-            case 14:
-                cell.setCellValue((double) ((Byte) value).byteValue());
-                break;
-            case 15:
-            case 16:
-            case 17:
-                cell.setCellValue((new DateTime(value)).toString(excelCell.timeFormat()));
-                break;
-            case 18:
-                cell.setCellValue(((BigDecimal) value).doubleValue());
+        if (fieldTypeName.equals("Byte") || fieldTypeName.equals("byte")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue((double) ((Byte) value).byteValue());
+        } else if (fieldTypeName.equals("Short") || fieldTypeName.equals("short")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue((double) ((Short) value).shortValue());
+        } else if (fieldTypeName.equals("Integer") || fieldTypeName.equals("int")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue((double) ((Integer) value).intValue());
+        } else if (fieldTypeName.equals("Long") || fieldTypeName.equals("long")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue((double) ((Long) value).longValue());
+        } else if (fieldTypeName.equals("Float") || fieldTypeName.equals("float")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue((double) ((Float) value).floatValue());
+        } else if (fieldTypeName.equals("double") || fieldTypeName.equals("Double")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue(((Double) value).doubleValue());
+        } else if (fieldTypeName.equals("boolean") || fieldTypeName.equals("Boolean")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue(((Boolean) value).booleanValue());
+        } else if (fieldTypeName.equals("BigDecimal")) {
+            cell.setCellStyle((CellStyle) cellStyleMap.get("NUMBER"));
+            cell.setCellValue(((BigDecimal) value).doubleValue());
+        } else if (fieldTypeName.equals("Date")) {
+            cell.setCellValue((new DateTime(value)).toString(excelCell.timeFormat()));
+        } else if (fieldTypeName.equals("DateTime")) {
+            cell.setCellValue((new DateTime(value)).toString(excelCell.timeFormat()));
+        } else if (fieldTypeName.equals("Timestamp")) {
+            cell.setCellValue((new DateTime(value)).toString(excelCell.timeFormat()));
+        } else {
+            cell.setCellValue(String.valueOf(value));
         }
     }
-
 
     /**
      * 上传Excel
@@ -424,7 +317,7 @@ public class ExcelUtils {
                                 }
                             }
                         } catch (Exception e) {
-                            log.error("\n==========解析Excel单元格异常==========", e);
+                            log.error("==========解析Excel单元格异常==========", e);
                         }
                     }
                     list.add(valueList);
@@ -451,7 +344,7 @@ public class ExcelUtils {
             workbook = WorkbookFactory.create(is);
             is.close();
         } catch (InvalidFormatException | IOException e) {
-            log.error("\n==========文件流转换为Workbook对象异常============", e);
+            log.error("==========文件流转换为Workbook对象异常============", e);
         }
         return workbook;
     }
@@ -467,7 +360,7 @@ public class ExcelUtils {
         try {
             multfile.transferTo(file);
         } catch (IOException e) {
-            log.error("\n上传的文件保存失败");
+            log.error("上传的文件保存失败", e);
         }
     }
 
@@ -488,7 +381,7 @@ public class ExcelUtils {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            log.error("\n新文件创建失败");
+            log.error("新文件创建失败", e);
         }
         return file;
     }
